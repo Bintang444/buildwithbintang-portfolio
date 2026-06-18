@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bintang - Portfolio</title>
+    <!-- Page metadata and external resources -->
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="pict.jfif">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <!-- Desktop menu, mobile menu button, and mobile dropdown are here -->
+    <header class="bg-brand-header fixed top-0 w-full z-50 shadow-sm border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between md:justify-start">
+            <a href="#" class="text-brand-primary font-bold text-lg tracking-wide w-48 shrink-0">
+                BINTANG
+            </a>
+
+            <!-- Mobile Menu Button (Hidden on Desktop) -->
+            <button class="md:hidden text-brand-text hover:text-brand-primary focus:outline-none" id="mobile-menu-btn">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 text-sm text-brand-text-light ml-8">
+                <button type="button" class="nav-link active hover:text-brand-text transition"
+                    data-target="about">About</button>
+                <span class="text-brand-border">|</span>
+                <button type="button" class="nav-link hover:text-brand-text transition"
+                    data-target="resume">Resume</button>
+                <span class="text-brand-border">|</span>
+                <button type="button" class="nav-link hover:text-brand-text transition"
+                    data-target="projects">Projects</button>
+                <span class="text-brand-border">|</span>
+                <button type="button" class="nav-link hover:text-brand-text transition"
+                    data-target="contact">Contact</button>
+            </nav>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div class="md:hidden hidden bg-brand-header border-t border-brand-border absolute w-full left-0 shadow-md"
+            id="mobile-menu">
+            <div class="flex flex-col py-4 px-6 space-y-4 text-sm text-brand-text-light">
+                <button type="button" class="text-left nav-link active hover:text-brand-text" data-target="about"
+                    data-close-mobile="true">About</button>
+                <button type="button" class="text-left nav-link hover:text-brand-text" data-target="resume"
+                    data-close-mobile="true">Resume</button>
+                <button type="button" class="text-left nav-link hover:text-brand-text" data-target="projects"
+                    data-close-mobile="true">Projects</button>
+                <button type="button" class="text-left nav-link hover:text-brand-text" data-target="contact"
+                    data-close-mobile="true">Contact</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <!-- Left sidebar profile + right content cards and tabs -->
+    <div class="max-w-7xl mx-auto w-full pt-28 pb-12 px-6 flex flex-col lg:flex-row gap-12 flex-grow">
+
+        <!-- Left Sidebar (Sticky Profile) -->
+        <aside
+            class="lg:w-1/4 lg:sticky lg:top-28 h-fit flex flex-col items-center lg:items-start text-center lg:text-left">
+            <!-- Profile Image -->
+            <div
+                class="w-40 h-40 rounded-full border-4 border-white overflow-hidden mb-4 shadow-lg bg-white ring-2 ring-brand-border">
+                <img src="pict.jfif" alt="Profile Picture" class="w-full h-full object-cover">
+            </div>
+
+            <h1 class="text-brand-text font-bold text-xl mb-1">BINTANG EKA WARDHANA SYARIFUDIN</h1>
+            <a href="mailto:bintangekawardhanasyarifudin@gmail.com"
+                class="text-sm text-brand-primary hover:underline mb-8">Email</a>
+
+            <div class="w-full border-t border-brand-border mb-6"></div>
+
+            <h2 class="font-bold text-brand-primary text-sm mb-3 w-full">ABOUT</h2>
+            <p class="text-sm text-brand-text-light mb-6 leading-relaxed">
+                I am a Software Engineering graduate exploring Python, AI, and IoT through hands-on projects and continuous learning.
+            </p>
+
+            <button type="button"
+                class="js-tab-button bg-brand-pill text-brand-primary text-sm font-medium py-2 px-5 rounded-full hover:bg-opacity-80 transition mb-10"
+                data-target="about">
+                Learn More
+            </button>
+
+            <!-- Social Links -->
+            <div class="flex space-x-4 text-brand-text-light mb-4">
+                <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-linkedin"></i></a>
+            </div>
+
+            <p class="text-xs text-brand-text-light">
+                © Bintang
+            </p>
+        </aside>
+
+        <!-- Right Content Area (The Card) -->
+        <main class="lg:w-3/4 bg-brand-card rounded-2xl p-8 md:p-12 shadow-lg border border-brand-border min-h-[600px]">
+
+            <!-- === ABOUT TAB === -->
+            <div id="about-content" class="tab-content active">
+                <h2 class="text-2xl font-bold text-brand-primary mb-1">ABOUT ME</h2>
+                <p class="text-xs text-brand-text-light uppercase tracking-wider mb-8">PYTHON • AI • IOT • SOFTWARE ENGINEERING</p>
+
+                <div class="space-y-6 text-sm text-brand-text leading-relaxed">
+                    <p>
+                        <i class="fas fa-laptop-code text-blue-500 mr-2"></i> I am a <strong>Software Engineering</strong> graduate with a strong interest in Python development, Artificial Intelligence, and IoT systems.
+                    </p>
+                    <p>
+                        I have experience building web, mobile, and embedded projects through school assignments, internships, and personal projects. My technical background includes <strong>Python, PHP, JavaScript, Android development, and ESP32-based IoT development.</strong>
+                    </p>
+                    <p>
+                        <i class="fas fa-server text-gray-600 mr-2"></i> Currently, I am focused on strengthening my software engineering fundamentals while <strong>exploring AI, automation, and connected devices.</strong> I enjoy learning through hands-on projects and turning ideas into practical solutions that combine software and hardware.
+                    </p>
+                    <p>
+                        I have experience working with <strong> HTML, CSS, JavaScript, Tailwind CSS, Git, Linux, SQL databases, and ESP32-based systems</strong>. I am also learning backend technologies such as <strong>Flask and FastAPI.</strong>
+                    </p>
+                    <p>
+                        My long-term goal is to build intelligent systems that bridge software, AI, and real-world devices.
+                    </p>
+                   
+                    <div class="mt-8">
+                        <p class="font-bold mb-2 text-brand-text">Specializations:</p>
+                        <ul class="list-disc list-inside space-y-1 ml-2 text-brand-text-light">
+                            <li>Python Development</li>
+                            <li>Artificial Intelligence (Learning Path)</li>
+                            <li>IoT & ESP32 Development</li>
+                            <li>Backend Development</li>
+                            <li>Web Development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- === RESUME TAB === -->
+            <div id="resume-content" class="tab-content">
+                <h2 class="text-2xl font-bold text-brand-primary mb-6">RESUME</h2>
+
+                <!-- Sub Navigation Pills -->
+                <div class="flex flex-wrap gap-3 mb-10">
+                    <button type="button" data-resume-tab="experience" id="pill-experience"
+                        class="resume-pill bg-brand-pill text-brand-primary text-sm font-medium py-1.5 px-4 rounded-full transition">Experience</button>
+                    <button type="button" data-resume-tab="certifications" id="pill-certifications"
+                        class="resume-pill bg-white/50 text-brand-text-light hover:bg-brand-pill hover:text-brand-primary text-sm font-medium py-1.5 px-4 rounded-full transition">Certifications</button>
+                </div>
+
+                <!-- Experience Section -->
+                <div id="resume-experience" class="resume-section block">
+                    <h3 class="text-lg font-bold text-brand-primary mb-6 text-center border-b border-brand-border pb-4">
+                        EXPERIENCE</h3>
+
+                    <!-- Experience Items with Timeline -->
+                    <div class="space-y-8 border-l-2 border-brand-border pl-6 ml-2">
+                        <!-- Item 1 -->
+                        <div class="relative">
+                            <div
+                                class="absolute -left-[31px] top-1 w-4 h-4 bg-brand-primary rounded-full ring-4 ring-brand-card">
+                            </div>
+                            <h4 class="font-bold text-brand-text text-base">BBPPMPV BMTI</h4>
+                            <p class="text-brand-primary text-sm font-medium">Software Engineer Intern</p>
+                            <p class="text-xs text-brand-text-light uppercase tracking-wide mb-2 mt-1">July 2025 -
+                                November 2025</p>
+                            <p class="text-sm text-brand-text mb-2">Completed a 4-month internship contributing to web, mobile, and IoT development projects at a national vocational education center.</p>
+                            <ul class="list-disc list-inside text-sm text-brand-text-light space-y-1 ml-2">
+                                <li>Developed a web application using PHP Native and Bootstrap to support internal digital workflows.</li>
+                                <li>Built an Android application using Kotlin and Android Studio with a functional and user-friendly interface.</li>
+                                <li>Designed and implemented an IoT-based smart lighting system using ESP32 and Blynk for remote device control via mobile application.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <!-- <div class="relative">
+                            <div
+                                class="absolute -left-[31px] top-1 w-4 h-4 bg-brand-border rounded-full ring-4 ring-brand-card">
+                            </div>
+                            <h4 class="font-bold text-brand-text text-base">FREELANCE</h4>
+                            <p class="text-brand-primary text-sm font-medium">Full Stack Developer</p>
+                            <p class="text-xs text-brand-text-light uppercase tracking-wide mb-2 mt-1">April 2021 -
+                                Present</p>
+                            <p class="text-sm text-brand-text mb-2">Delivered end-to-end web, mobile, and embedded
+                                products, covering application development, infrastructure, deployment, and long-term
+                                maintenance.</p>
+                            <ul class="list-disc list-inside text-sm text-brand-text-light space-y-1 ml-2">
+                                <li>Built Android and web products for utility, productivity, and connected-device use
+                                    cases.</li>
+                                <li>Handled deployment, API integration, and self-hosted infrastructure as part of
+                                    complete product delivery.</li>
+                                <li>Maintained AI API infrastructure for an EU project and personal hosting at <a
+                                        href="#" class="text-blue-600 hover:underline">ayra.eu.org</a>.</li>
+                                <li>Published open-source work and technical deliverables at <a href="#"
+                                        class="text-blue-600 hover:underline">linux-apps.com/u/ayrahikari</a>.</li>
+                            </ul>
+                        </div> -->
+
+                        <!-- Item 3 -->
+                        <!-- <div class="relative">
+                            <div
+                                class="absolute -left-[31px] top-1 w-4 h-4 bg-brand-border rounded-full ring-4 ring-brand-card">
+                            </div>
+                            <h4 class="font-bold text-brand-text text-base">PT. CIPTA MULTI BUANA PERKASA</h4>
+                            <p class="text-brand-primary text-sm font-medium">Co-lead IT Network Engineer</p>
+                            <p class="text-xs text-brand-text-light uppercase tracking-wide mb-2 mt-1">September 2020 -
+                                February 2021</p>
+                            <p class="text-sm text-brand-text mb-2">Co-led network and infrastructure work for office
+                                operations, supporting expansion, stability, and day-to-day IT reliability.</p>
+                            <ul class="list-disc list-inside text-sm text-brand-text-light space-y-1 ml-2">
+                                <li>Designed and managed company network topology for multi-department operations.</li>
+                                <li>Led network installation and configuration for new office environments.</li>
+                                <li>Maintained servers, databases, and hardware to keep internal systems dependable.
+                                </li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+
+                <!-- Certifications Section -->
+                <div id="resume-certifications" class="resume-section hidden">
+                    <h3 class="text-lg font-bold text-brand-primary mb-6 text-center border-b border-brand-border pb-4">
+                        CERTIFICATIONS</h3>
+
+                    <div class="grid grid-cols-1 gap-4">
+                        <!-- Cert 1 -->
+                        <!-- <div
+                            class="p-5 border border-brand-border rounded-xl bg-brand-bg/50 hover:shadow-md hover:border-brand-primary hover:bg-white transition duration-300 group">
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-white border border-brand-border flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                                    <i class="fab fa-aws text-2xl text-[#FF9900]"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-brand-text text-sm">AWS CERTIFIED SOLUTIONS ARCHITECT</h4>
+                                    <p class="text-brand-primary text-sm font-medium">Amazon Web Services</p>
+                                    <p class="text-[11px] text-brand-text-light uppercase tracking-wide mb-2 mt-1">
+                                        Issued Jan 2024</p>
+                                    <p class="text-sm text-brand-text leading-relaxed">Validated expertise in designing
+                                        distributed systems and deploying applications on the AWS platform.</p>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Cert 2 -->
+                        <!-- <div
+                            class="p-5 border border-brand-border rounded-xl bg-brand-bg/50 hover:shadow-md hover:border-brand-primary hover:bg-white transition duration-300 group">
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-white border border-brand-border flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                                    <i class="fab fa-google text-2xl text-[#4285F4]"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-brand-text text-sm">GOOGLE ASSOCIATE ANDROID DEVELOPER
+                                    </h4>
+                                    <p class="text-brand-primary text-sm font-medium">Google Developers</p>
+                                    <p class="text-[11px] text-brand-text-light uppercase tracking-wide mb-2 mt-1">
+                                        Issued Aug 2023</p>
+                                    <p class="text-sm text-brand-text leading-relaxed">Demonstrated proficiency in core
+                                        Android development skills, including Kotlin, UI design, and background
+                                        processing.</p>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Cert 3 -->
+                        <!-- <div
+                            class="p-5 border border-brand-border rounded-xl bg-brand-bg/50 hover:shadow-md hover:border-brand-primary hover:bg-white transition duration-300 group">
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-white border border-brand-border flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                                    <i class="fas fa-network-wired text-xl text-[#049fd9]"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-brand-text text-sm">CISCO CCNA ROUTING & SWITCHING</h4>
+                                    <p class="text-brand-primary text-sm font-medium">Cisco Systems</p>
+                                    <p class="text-[11px] text-brand-text-light uppercase tracking-wide mb-2 mt-1">
+                                        Issued May 2022</p>
+                                    <p class="text-sm text-brand-text leading-relaxed">Certified knowledge in network
+                                        fundamentals, network access, IP connectivity, and IP services.</p>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- === PROJECTS TAB === -->
+            <div id="projects-content" class="tab-content">
+                <h2 class="text-2xl font-bold text-brand-primary mb-1">PROJECTS</h2>
+                <p
+                    class="text-xs text-brand-text-light uppercase tracking-wider mb-8 border-b border-brand-border pb-4">
+                    Selected Projects & Engineering Work</p>
+
+                <!-- Project Item 2 (Dummy) -->
+                <!-- <div class="border-brand-border pt-8">
+                    <h3 class="text-xl font-bold text-brand-text mb-4">SMART HOME IOT DASHBOARD</h3>
+
+                    <img src="https://placehold.co/800x400/e0e7ff/4f46e5?text=IoT+Dashboard+Preview"
+                        alt="Smart Home Dashboard"
+                        class="w-full h-48 object-cover rounded-xl mb-4 border border-brand-border shadow-sm">
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span
+                            class="bg-brand-pill text-brand-primary text-xs font-medium py-1 px-3 rounded-md">Vue.js</span>
+                        <span
+                            class="bg-brand-pill text-brand-primary text-xs font-medium py-1 px-3 rounded-md">MQTT</span>
+                        <span
+                            class="bg-brand-pill text-brand-primary text-xs font-medium py-1 px-3 rounded-md">ESP32</span>
+                    </div>
+
+                    <div class="bg-brand-bg border border-brand-border rounded-xl p-4 text-sm mb-4">
+                        <p class="text-brand-text-light leading-relaxed">
+                            A centralized dashboard for monitoring and controlling local IoT devices, built with a
+                            real-time MQTT bridge and Vue.js frontend.
+                        </p>
+                    </div>
+
+                    <div class="text-sm text-brand-text-light">
+                        <p><strong>Details:</strong> Designed to replace proprietary smart home apps with a fully
+                            localized, cloud-independent solution running on a Raspberry Pi.</p>
+                    </div>
+                </div> -->
+
+                <!-- Project Item 3 (Dummy) -->
+                <!-- <div class="mb-8 border-t border-brand-border pt-8">
+                    <h3 class="text-xl font-bold text-brand-text mb-4">FINANCE TRACKER APP</h3>
+
+                    <img src="https://placehold.co/800x400/e0e7ff/4f46e5?text=Finance+App+Preview"
+                        alt="Finance Tracker App"
+                        class="w-full h-48 object-cover rounded-xl mb-4 border border-brand-border shadow-sm">
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span
+                            class="bg-brand-pill text-brand-primary text-xs font-medium py-1 px-3 rounded-md">Kotlin</span>
+                        <span
+                            class="bg-brand-pill text-brand-primary text-xs font-medium py-1 px-3 rounded-md">Android</span>
+                        <span class="bg-brand-pill text-brand-primary text-xs font-medium py-1 px-3 rounded-md">Room
+                            DB</span>
+                    </div>
+
+                    <div class="bg-brand-bg border border-brand-border rounded-xl p-4 text-sm mb-4">
+                        <p class="text-brand-text-light leading-relaxed">
+                            An offline-first Android application for personal finance management, featuring custom data
+                            visualization and budget forecasting.
+                        </p>
+                    </div>
+
+                    <div class="text-sm text-brand-text-light">
+                        <p><strong>Details:</strong> Built natively using Kotlin and Jetpack Compose, prioritizing
+                            performance, smooth animations, and zero data telemetry.</p>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- === CONTACT TAB === -->
+            <div id="contact-content" class="tab-content">
+                <h2 class="text-2xl font-bold text-brand-primary mb-6">CONTACT</h2>
+
+                <p class="text-sm text-brand-text mb-4">Looking to build something</p>
+
+                <ul class="list-disc list-inside text-sm mb-8 space-y-2 ml-2">
+                    <li><a href="mailto:bintangekawardhanasyarifudin@gmail.com"
+                            class="text-blue-600 hover:underline">Email</a></li>
+                </ul>
+
+                <div class="flex space-x-5 text-brand-text">
+                    <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-github text-lg"></i></a>
+                    <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-facebook text-lg"></i></a>
+                    <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="#" class="hover:text-brand-primary transition"><i class="fab fa-linkedin text-lg"></i></a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>
