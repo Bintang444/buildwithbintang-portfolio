@@ -20,6 +20,19 @@ tailwind.config = {
     }
 };
 
+function updateLearnMoreButton(tabId) {
+    const learnMoreBtn = document.querySelector('.js-tab-button');
+    if (learnMoreBtn) {
+        if (tabId === 'projects') {
+            learnMoreBtn.textContent = 'About';
+            learnMoreBtn.setAttribute('data-target', 'about');
+        } else {
+            learnMoreBtn.textContent = 'Learn More';
+            learnMoreBtn.setAttribute('data-target', 'projects');
+        }
+    }
+}
+
 function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
     document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
@@ -30,6 +43,8 @@ function switchTab(tabId) {
     }
 
     document.querySelectorAll(`.nav-link[data-target="${tabId}"]`).forEach(link => link.classList.add('active'));
+    
+    updateLearnMoreButton(tabId);
 
     if (window.innerWidth < 1024) {
         const mainElement = document.querySelector('main');
