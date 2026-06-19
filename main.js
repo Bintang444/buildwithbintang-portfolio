@@ -20,7 +20,6 @@ tailwind.config = {
     }
 };
 
-// Show one tab content at a time and update active menu items
 function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
     document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
@@ -40,11 +39,25 @@ function switchTab(tabId) {
     }
 }
 
-// Close the mobile dropdown when a menu item is clicked
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const button = document.getElementById('mobile-menu-btn');
+    if (menu) {
+        const isHidden = menu.classList.toggle('hidden');
+        if (button) {
+            button.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+        }
+    }
+}
+
 function closeMobileMenu() {
     const menu = document.getElementById('mobile-menu');
+    const button = document.getElementById('mobile-menu-btn');
     if (menu) {
         menu.classList.add('hidden');
+    }
+    if (button) {
+        button.setAttribute('aria-expanded', 'false');
     }
 }
 
@@ -72,15 +85,15 @@ function switchResumeTab(section) {
     }
 }
 
-// Initialize default tabs and attach button event listeners
-window.addEventListener('DOMContentLoaded', () => {
+function initNavigation() {
     switchTab('about');
     switchResumeTab('experience');
 
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    if (mobileMenuBtn) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-controls', 'mobile-menu');
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
     }
 
     document.querySelectorAll('button[data-target]').forEach(button => {
@@ -103,4 +116,77 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    const brandHomeLink = document.getElementById('brand-home');
+    if (brandHomeLink) {
+        brandHomeLink.addEventListener('click', event => {
+            event.preventDefault();
+            switchTab('about');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) {
+            closeMobileMenu();
+        }
+    });
+
+    window.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            closeMobileMenu();
+            document.querySelectorAll('.project-modal').forEach(modal => {
+                if (!modal.classList.contains('hidden')) {
+                    closeModal(modal.id);
+                }
+            });
+        }
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    initNavigation();
+    initProjectModals();
 });
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function initProjectModals() {
+    document.querySelectorAll('[data-modal-target]').forEach(element => {
+        element.addEventListener('click', () => {
+            const target = element.getAttribute('data-modal-target');
+            if (target) openModal(target);
+        });
+    });
+
+    document.querySelectorAll('[data-modal-close]').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.project-modal');
+            if (modal && modal.id) {
+                closeModal(modal.id);
+            }
+        });
+    });
+
+    document.querySelectorAll('.project-modal').forEach(modal => {
+        modal.addEventListener('click', event => {
+            if (event.target === modal) {
+                closeModal(modal.id);
+            }
+        });
+    });
+}
